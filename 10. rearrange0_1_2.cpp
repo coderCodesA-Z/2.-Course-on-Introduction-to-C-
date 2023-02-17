@@ -49,19 +49,22 @@ void file_i_o() {
     #endif
 }
 
-void rearrangeArray(ll *a, ll n) {
-	ll lo = 0, hi = n - 1;
-	while(lo < hi) {
-		while(not a[lo] and lo < hi) lo++;
-		while(a[hi] and lo < hi) hi--;
-
-		if(lo < hi) {
-			a[lo] = 0;
-			a[hi] = 1;
-			lo++;
-			hi--;
+void rearrange012(ll *a, ll n) {
+	ll left, mid, right;
+	left = mid = 0;
+	right = n - 1;
+	while(mid <= right) {
+		if(a[mid] == 0) {
+			swap(a[left], a[mid]);
+			left++, mid++;
+		} else if(a[mid] == 1) {
+			mid++;
+		} else if(a[mid] == 2){
+			swap(a[mid], a[right]);
+			right--;
 		}
 	}
+	return;
 }
 
 int main() {
@@ -70,14 +73,15 @@ int main() {
 
 
     ll n;
-    cin>> n;
+    cin>>n;
 
     ll *a = new ll(n);
-    for(int i =0; i < n; i++) cin>>a[i];
 
-    rearrangeArray(a, n);
+    for(ll i = 0; i < n; i++) cin>>a[i];
 
-	for(int i =0; i < n; i++) cout<<a[i]<<" ";
+    rearrange012(a, n);
+
+	for(ll i = 0; i < n; i++) cout<<a[i]<<" ";
 
 
     #ifndef ONLINE_JUDGE 
