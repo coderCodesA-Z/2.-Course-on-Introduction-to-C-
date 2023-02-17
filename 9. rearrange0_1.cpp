@@ -54,85 +54,26 @@ int main() {
     file_i_o();
 
 
-    // primes 
-    long long int size = 1000001;
-	bool primes[size+1];
-	memset(primes, 1, sizeof(primes));
+    ll n;
+    cin>> n;
 
-	primes[0] = primes[1] = 0;
+    ll *a = new ll(n);
+    for(int i =0; i < n; i++) cin>>a[i];
 
-	// multiples of 2 marked false
-	for(int j = 2; j <= size; j+=2) primes[j] = 0;
+    ll lo = 0, hi = n - 1;
+	while(lo < hi) {
+		while(not a[lo] and lo < hi) lo++;
+		while(a[hi] and lo < hi) hi--;
 
-	// multiples of factors of 3 and above marked false
-	for(int i = 3; i * i <= size; ++i) {
-		if(primes[i]) {
-			for(int j = i * i; j <= size; j+=(2*i)) {
-				primes[j] = 0;
-			}
+		if(lo < hi) {
+			a[lo] = 0;
+			a[hi] = 1;
+			lo++;
+			hi--;
 		}
 	}
 
-
-	// inputs
-    long long int n;
-    cin>>n;
-
-    long long int *a = new long long int(n);
-    for(long long int i = 0; i < n; i++) cin>>a[i];
-
-    // t-tprimes logic starts
-    for(long long int i = 0; i < n; ++i) {
-
-    	// 1 is not a t-prime
-    	if(a[i] == 1) {
-    		cout<<"NO"<<"\n";
-    		continue;
-    	}
-
-    	// find sqrt
-    	// since the Sqroot of the max x(10^12) value will be around 10^6, 
-    	// high can be set to some value around 10^7 
-
-    	// long long int sqrtNum = -1, low = 1, high = a[i]; high changed
-	   	long long int sqrtNum = -1, low = 1, high = 10000005;
-    	while(low<=high) {
-    		long long int mid = low + ((high-low)>>1);
-    		if(mid * mid == a[i]) {
-    			// mid * mid overflow, if hi set to a[i]
-    			sqrtNum = mid;
-    			break;
-    		} else if(mid * mid > a[i]) {
-    			high = mid - 1;
-    		} else {
-    			low = mid + 1;
-    			// sqrtNum = mid;
-    		}
-    	}
-
-    	if(sqrtNum == -1) {
-    		cout<<"NO"<<"\n";
-    		continue;
-    	}
-
-    	// if perfect square primality check
-
-    	// O(n^1/4)
-    	// bool isSqrtNumPrime = 1;
-    	// for(long long int div = 2; div * div <= sqrtNum; div++) {
-    	// 	if(sqrtNum % div == 0) {
-    	// 		isSqrtNumPrime = 0;
-    	// 		cout<<"NO"<<"\n";
-    	// 		break;
-    	// 	}
-    	// }
-
-    	// if(isSqrtNumPrime) cout<<"YES"<<"\n";
-
-    	// O(1)
-    	if(primes[sqrtNum]) cout<<"YES"<<"\n";
-    	else cout<<"NO"<<"\n";
-    }
+	for(int i =0; i < n; i++) cout<<a[i]<<" ";
 
 
     #ifndef ONLINE_JUDGE 
