@@ -49,22 +49,15 @@ void file_i_o() {
     #endif
 }
 
-int main() {
-    clock_t begin = clock();
-    file_i_o();
-
-
-    // primes 
-    long long int size = 1000001;
-	bool primes[size+1];
-	memset(primes, 1, sizeof(primes));
-
-	primes[0] = primes[1] = 0;
+void genPrime(bool *primes, ll size) {
+	// 0, 1 not prime
+  	primes[0] = primes[1] = 0;
 
 	// multiples of 2 marked false
 	for(int j = 2; j <= size; j+=2) primes[j] = 0;
+	primes[2] = 1; // 2 prime
 
-	// multiples of factors of 3 and above marked false
+	// multiples of 3 and above marked false
 	for(int i = 3; i * i <= size; ++i) {
 		if(primes[i]) {
 			for(int j = i * i; j <= size; j+=(2*i)) {
@@ -72,69 +65,70 @@ int main() {
 			}
 		}
 	}
+}
 
+ll findSqrt(ll num) {
+	// since the Sqroot of the max x(10^12) value will be around 10^6, 
+	// high can be set to some value around 10^7 
 
-	// inputs
-    long long int n;
+	// long long int sqrtNum = -1, low = 1, high = a[i]; high changed
+   	ll sqrtNum = -1, low = 1, high = 10000005;
+	
+	while(low<=high) {
+		ll mid = low + ((high-low)>>1);
+		if(mid * mid == num) {
+			// mid * mid overflow, if hi set to a[i]
+			sqrtNum = mid;
+			break;
+		} else if(mid * mid > num) {
+			high = mid - 1;
+		} else {
+			low = mid + 1;
+			// sqrtNum = mid;
+		}
+	}
+
+	return sqrtNum;
+}
+
+bool tPrime(ll num, bool *primes) {
+	if(num == 1) return 0;
+
+	// find sqrt
+	ll sqrtNum = findSqrt(num);
+
+	// not a perfect square
+	if(sqrtNum == -1) return 0;
+
+	// // if perfect square, check primality
+	if(not primes[sqrtNum]) return 0;
+
+	return 1;
+}
+
+int main() {
+    clock_t begin = clock();
+    file_i_o();
+
+    // gen prime array
+	ll size = 1000005;
+	bool *primes = new bool(size + 1);
+	for(ll i = 0; i <= size; i++) primes[i] = 1;
+	genPrime(primes, size);
+	
+
+    // take input
+    ll n;
     cin>>n;
+    ll *a = new ll(n);
+    for(ll i = 0; i < n; i++) cin>>a[i];
 
-    long long int *a = new long long int(n);
-    for(long long int i = 0; i < n; i++) cin>>a[i];
-
-    // t-tprimes logic starts
-    for(long long int i = 0; i < n; ++i) {
-
-    	// 1 is not a t-prime
-    	if(a[i] == 1) {
-    		cout<<"NO"<<"\n";
-    		continue;
-    	}
-
-    	// find sqrt
-    	// since the Sqroot of the max x(10^12) value will be around 10^6, 
-    	// high can be set to some value around 10^7 
-
-    	// long long int sqrtNum = -1, low = 1, high = a[i]; high changed
-	   	long long int sqrtNum = -1, low = 1, high = 10000005;
-    	while(low<=high) {
-    		long long int mid = low + ((high-low)>>1);
-    		if(mid * mid == a[i]) {
-    			// mid * mid overflow, if hi set to a[i]
-    			sqrtNum = mid;
-    			break;
-    		} else if(mid * mid > a[i]) {
-    			high = mid - 1;
-    		} else {
-    			low = mid + 1;
-    			// sqrtNum = mid;
-    		}
-    	}
-
-    	if(sqrtNum == -1) {
-    		cout<<"NO"<<"\n";
-    		continue;
-    	}
-
-    	// if perfect square primality check
-
-    	// O(n^1/4)
-    	// bool isSqrtNumPrime = 1;
-    	// for(long long int div = 2; div * div <= sqrtNum; div++) {
-    	// 	if(sqrtNum % div == 0) {
-    	// 		isSqrtNumPrime = 0;
-    	// 		cout<<"NO"<<"\n";
-    	// 		break;
-    	// 	}
-    	// }
-
-    	// if(isSqrtNumPrime) cout<<"YES"<<"\n";
-
-    	// O(1)
-    	if(primes[sqrtNum]) cout<<"YES"<<"\n";
-    	else cout<<"NO"<<"\n";
+    // t-Prime 
+    for(ll i = 0; i < n; i++) {
+    	if(tPrime(a[i], primes)) cout<<"YES\n";
+    	else cout<<"NO\n";
     }
-
-
+    
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();
       std::cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
