@@ -49,78 +49,36 @@ void file_i_o() {
     #endif
 }
 
-int bs(int *a, int el, int start, int end) {
-	int res = end;
-	int lo = start, hi = end - 1;
+int maxSumSubArray(int *a, int n) {
+	int maxEl = INT_MIN;
+	int globalMax = INT_MIN;
+	int maxSumSoFar = 0;
 
-	while(lo <= hi) {
-		int mid = lo + ((hi-lo)>>1);
-
-		if(a[mid] >= el) {
-			res = mid;
-			hi = mid - 1;
-		} else {
-			lo = mid + 1;
-		}
-	}
-
-	return res;
-}
-
-int pairsWithDDiff(int *a, int n, int d) {
-
-	sort(a, a+n); 
-	int count = 0;
-
-	// sol1 : two pointers approach
-	// int lo = 0, hi = 1;
-    // set<pair<int, int>> pr;
-	    
-    // while(hi < n) {
-    //     if(a[hi] - a[lo] == d) {
-    //         pr.insert({a[hi], a[lo]});
-    //         lo++;
-    //         hi++;
-    //     } else if(a[hi] - a[lo] < d) {
-    //         hi++;
-    //     } else {
-    //         lo++;
-    //     }
-    // }
-    // count = pr.size();
-    // for(auto it:pr) {
-    // 	cout<<it.first<<" "<<it.second<<"\n";
-    // }
-
-	// sol2 : binary search approach(finding lower bound)
 	for(int i = 0; i < n; i++) {
-		if(i!= 0 and a[i] == a[i - 1]) continue; // avoiding duplicates
-
-		int X = bs(a, a[i] + d, i + 1, n);
-
-		if(X != n) {
-			int Y = bs(a, a[i] + d + 1, i + 1, n);
-			count+=(Y - X);
-		}
+		maxSumSoFar = max(maxSumSoFar + a[i], 0);
+		globalMax = max(globalMax, maxSumSoFar);
+		maxEl = max(maxEl, a[i]);
 	}
 
+	if(globalMax == 0) return maxEl;
 
-	return count;
+	return globalMax;
 }
 
 int main() {
     clock_t begin = clock();
     file_i_o();
 
-    int n, d;
-    cin>>n>>d;
+
+    int n;
+    cin>>n;
 
     int *a = new int[n];
-    for(int i = 0; i < n; i++) {
-    	cin>>a[i];
-    }
 
-    cout<<pairsWithDDiff(a, n, d);
+    for(int i = 0; i < n; i++) cin>>a[i];
+
+    cout<<maxSumSubArray(a, n);
+
 
 
     #ifndef ONLINE_JUDGE 

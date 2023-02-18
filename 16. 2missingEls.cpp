@@ -49,79 +49,65 @@ void file_i_o() {
     #endif
 }
 
-int bs(int *a, int el, int start, int end) {
-	int res = end;
-	int lo = start, hi = end - 1;
+void missingEls(int *arr, int n) {
+	// solution1 : using indexing
+	// int *b = new int[2];
+	// for(int i = 0; i < 2; i++) b[i] = 1;
 
-	while(lo <= hi) {
-		int mid = lo + ((hi-lo)>>1);
+	// int idx = -1;
+	// for(int i = 0; i < n ; i++) {
+	// 	idx = abs(arr[i]) - 1;
+	// 	if(idx < n) {
+	// 		arr[idx]*= -1;
+	// 	} else {
+	// 		idx = idx % n;
+	// 		b[idx]*= -1;
+	// 	}
+	// }
 
-		if(a[mid] >= el) {
-			res = mid;
-			hi = mid - 1;
-		} else {
-			lo = mid + 1;
-		}
+	// for(int i = 0; i < n; i++) cout<<arr[i]<<" ";
+	// for(int i = 0; i < 2; i++) cout<<b[i]<<" ";
+	// cout<<"\n";
+
+	// for(int i = 0; i < n; i++) if(arr[i] > 0) cout<<i+1<<" ";
+	// for(int i = 0; i < 2; i++) if(b[i] > 0) cout<<n+i+1<<" ";
+	// return;
+
+	// solution 2 : using xorsum
+	int xorSum = 0;
+	for(int i = 0; i <= n + 2; i++) {
+		if(i < n) xorSum^=arr[i];
+		xorSum^=i;
 	}
 
-	return res;
-}
+	// check setbit
+	int setBit = xorSum & (~(xorSum - 1)); // rightmost set bit
 
-int pairsWithDDiff(int *a, int n, int d) {
-
-	sort(a, a+n); 
-	int count = 0;
-
-	// sol1 : two pointers approach
-	// int lo = 0, hi = 1;
-    // set<pair<int, int>> pr;
-	    
-    // while(hi < n) {
-    //     if(a[hi] - a[lo] == d) {
-    //         pr.insert({a[hi], a[lo]});
-    //         lo++;
-    //         hi++;
-    //     } else if(a[hi] - a[lo] < d) {
-    //         hi++;
-    //     } else {
-    //         lo++;
-    //     }
-    // }
-    // count = pr.size();
-    // for(auto it:pr) {
-    // 	cout<<it.first<<" "<<it.second<<"\n";
-    // }
-
-	// sol2 : binary search approach(finding lower bound)
-	for(int i = 0; i < n; i++) {
-		if(i!= 0 and a[i] == a[i - 1]) continue; // avoiding duplicates
-
-		int X = bs(a, a[i] + d, i + 1, n);
-
-		if(X != n) {
-			int Y = bs(a, a[i] + d + 1, i + 1, n);
-			count+=(Y - X);
+	int x = 0, y = 0;
+	for(int i = 0; i <= n + 2; i++) {
+		if(i < n) {
+			if(arr[i] & setBit) x^=arr[i]; // right most bit set
+			else y^=arr[i]; // rightmost bit unset
 		}
+		if(i & setBit) x^=i;
+		else y^=i;
 	}
 
-
-	return count;
+	cout<<x<<" "<<y<<"\n";
 }
 
 int main() {
     clock_t begin = clock();
     file_i_o();
 
-    int n, d;
-    cin>>n>>d;
+    int n;
+    cin>>n;
 
     int *a = new int[n];
-    for(int i = 0; i < n; i++) {
-    	cin>>a[i];
-    }
 
-    cout<<pairsWithDDiff(a, n, d);
+    for(int i = 0; i < n; i++) cin>>a[i];
 
+    missingEls(a, n);
 
     #ifndef ONLINE_JUDGE 
       clock_t end = clock();
