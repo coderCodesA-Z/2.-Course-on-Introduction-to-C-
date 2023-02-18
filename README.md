@@ -45,8 +45,19 @@ Parameters : Recieved in the functions.
 
 Parameter Types : 
 a. Default
+
 b. Actual
+
 c. Formal
+
+**Pass By Value, Pass By Reference**
+```
+<returnType> function1(int a, int b) {} // a & b are recieved a copy of actual arguments
+
+<returnType> function2(int &a, int &b) {} // a & b are pointing to the same memory address where actual parameters are located.
+
+<returnType> function3(int *a, int *b) {} // a & b are pointers to the actual arguments
+```
 
 
 ## Pointers
@@ -64,5 +75,17 @@ b. Wild Pointer : Pointer created but not assigned some value.
    ```
    <dataType> *ptr;
    ```
-c. 
+c. Null Pointer : Special Pointer pointing to null value.
+   ```
+    <dataType> *ptr = null;
+   ```
+
+d. Void Pointer : Special Pointer that points to some memory address, not specific.
+   ```
+   void *ptr;
+   ```
+   Pointer arithmetics not possible on void pointer.
+   
+   Dereferencing not possible on void pointer. Until typecasting.
+   
  
