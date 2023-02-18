@@ -97,4 +97,14 @@ Memory Leakages are instances where some part of memory space can be accessed by
  Aliases to actual variables present in memory.
  
  ## Pointers vs References
+ Pointers are variables themselves that stores address whereas references are just aliases.
  
+ Pointers can be assigned any time after declaration, References needs to be initialised when declared.
+ 
+ Pointers can be reassigned whereas References can't be reassigned.
+ 
+ Pointers can be null but not references.
+ 
+ Pointers support pointer arithmetics but not references.
+ 
+ Pointers can be deeply nested but not references. [Double Pointer : Pointer Pointing to Pointer....]
