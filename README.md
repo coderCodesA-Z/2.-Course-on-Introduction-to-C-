@@ -88,4 +88,13 @@ d. Void Pointer : Special Pointer that points to some memory address, not specif
    
    Dereferencing not possible on void pointer. Until typecasting.
    
+**Memory Leakage** 
+If pointers are not handled carefully, there can be memory leakages. 
+Dangling Pointers and Wild Pointers can cause this issue, so they should be pointed to null to avoid it.
+Memory Leakages are instances where some part of memory space can be accessed by the pointers even though it was supposed to be a hidden data.
+   
+ ## References
+ Aliases to actual variables present in memory.
+ 
+ ## Pointers vs References
  
