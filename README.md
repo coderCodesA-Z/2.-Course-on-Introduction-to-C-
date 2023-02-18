@@ -39,6 +39,16 @@ identifer = val; // assignment
 ## Functions
 Functions are blocks of code that structures the overall program file and also helps to reuse code.
 
+Arguments : passed to functions
+
+Parameters : Recieved in the functions.
+
+Parameter Types : 
+a. Default
+b. Actual
+c. Formal
+
+
 ## Pointers
 Pointers store addresses. Size : 8bytes(depends on compiler), but size doesn't vary depending on the datatype. 
 
@@ -49,3 +59,10 @@ a. Dangling Pointer : Pointer that was initialised some address but later delete
    <dataType> *ptr = &x;
    delete ptr;
    ```
+   
+b. Wild Pointer : Pointer created but not assigned some value.
+   ```
+   <dataType> *ptr;
+   ```
+c. 
+ 
