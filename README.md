@@ -41,7 +41,9 @@ Functions are blocks of code that structures the overall program file and also h
 
 ## Pointers
 Pointers store addresses. Size : 8bytes(depends on compiler), but size doesn't vary depending on the datatype. 
+
 Types : 
+
 a. Dangling Pointer : Pointer that was initialised some address but later deleted. 
    ```
    <dataType> *ptr = &x;
