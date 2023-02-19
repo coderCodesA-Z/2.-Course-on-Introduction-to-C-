@@ -80,7 +80,7 @@ int trappedWater(int *a, int n) {
 	int left = 0, right = n - 1; // pointers to 
 	int totalWater = 0;
 
-	while(left < right) {
+	while(left <= right) {
 
 		// a building with similar or greater height present at the right
 		if(a[left] <= a[right]) { 
