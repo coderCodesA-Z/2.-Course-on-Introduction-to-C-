@@ -275,3 +275,47 @@ Memory Leakages are instances where some part of memory space can be accessed by
    return 0;
  }
  ```
+ **Inside structs we can have member fields + member functions.**
+ ```
+ struct Point {
+   // Constructor
+   Point(int x1, int y1) {
+      x = x1;
+      y = y1;
+   }
+
+   int x = 0, y = 0;
+
+   void sum() {
+      cout<<x + y<<"\n";
+   }
+ };
+
+ int main() {
+   struct Point p = Point(1, 2); // since constructor present, struct needs to be created using constructor.
+   // if values not passed, default values gets assigned.
+   return 0;
+ }
+ ```
+
+ **A variable assocaited with struct**
+
+ ```
+ struct Point {
+   Point(int x1, int y1) {
+      x = x1;
+      y = y1;
+   }
+
+   int x = 0, y = 0;
+  
+
+   void sum() {
+      cout<<x + y<<"\n";
+   }
+ } var(1, 2);
+
+ int main() {
+   cout<<var.x<<" "<<var.y<<"\n";
+ }
+ ```
