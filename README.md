@@ -62,11 +62,11 @@ c. Formal
 ## Pointers
 Pointers store addresses. Size : 8bytes(depends on compiler), but size doesn't vary depending on the datatype. 
 
-'''
+```
 <dataType of var> *ptrName = &varName; 
 cout<< ptrName<<"\n"; // address of variable
 cout<< *ptrName<<"\n"; // value present within the address of variable. Dereferencing
-'''
+```
 
 Types : 
 
