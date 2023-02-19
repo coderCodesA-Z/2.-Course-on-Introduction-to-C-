@@ -263,8 +263,7 @@ Memory Leakages are instances where some part of memory space can be accessed by
  **Default Values to member fields**
  ```
  struct Point {
-   int x, y;
-   x = y = 0;
+   int x = 0, y = 0;
  };
 
  // if default values assigned to struct members then {} initialisation can no more be used.
@@ -321,14 +320,16 @@ Memory Leakages are instances where some part of memory space can be accessed by
  }
  ```
  **Structs can be global as well as local like functions**
- **In C writing struct while declararing a struct varaiable is necessary but in C++ its not necessary.
+ 
+ **In C writing struct while declararing a struct varaiable is necessary but in C++ its not necessary.**
  
  **Static Member Vars in structs**
  ```
  struct Point {
    static int x; // shared variable. Not a property of the struct vars anymore but part of the struct itself.
  };
- int Point::x = 0;
+ int Point::x = 0; // non-constant static vars needs to be initialised out of the struct block.
+ // If the static var is made constant, then it can't be updated
 
  int main() {
    Point p;
