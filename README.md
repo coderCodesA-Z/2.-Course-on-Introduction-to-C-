@@ -128,3 +128,39 @@ Memory Leakages are instances where some part of memory space can be accessed by
  g++ -S learn.cpp -o learn.s -> generate assemly file of learn.cpp
 
  Source Code -> Compiler(compiles + makes optimizations) -> Assembly Code -> Object Code -> Linking and Loading -> Executable File 
+
+ ## Strings
+ **Declaring Strings**
+ ```
+ string str = "abc";
+
+ char str1[] = "def";
+ char str2[] = {'g', 'h', 'i', '\0'}; // '/0' is the Null character used for terminating strings.
+
+ const char *str3 = "string"; // without 'const' c++ throws a warning. 
+ 
+ // Use of string implementation : 
+ // 1. Mutable String Needed.
+ // 2. Dynamic String, can be updated, characters can be appended etc.
+ // 3. also has lots of in-built methods.
+ // 4. Reserves memory in stack, but if size if large then based on the size, memory is reserved 
+ //    in heap as well. 
+
+ // char[] use, C-style strings : 
+ // 1. Avoid, reserves memory in stack.
+
+ // const char* use :
+ // 1. size not needed.
+ // 2. immutable strings. 
+ ```
+
+ **Note** : When using `string` implementation don't use headers like : 
+
+ #include<cstring>
+ #include<string.h>
+ Then string becomes a c-style string.
+
+ Some important string methods : 
+ ```
+ 
+ ```
