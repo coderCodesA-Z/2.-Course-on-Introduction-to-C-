@@ -317,7 +317,28 @@ Memory Leakages are instances where some part of memory space can be accessed by
 
  int main() {
    cout<<var.x<<" "<<var.y<<"\n";
+   return 0;
  }
  ```
  **Structs can be global as well as local like functions**
  **In C writing struct while declararing a struct varaiable is necessary but in C++ its not necessary.
+ 
+ **Static Member Vars in structs**
+ ```
+ struct Point {
+   static int x; // shared variable. Not a property of the struct vars anymore but part of the struct itself.
+ };
+ int Point::x = 0;
+
+ int main() {
+   Point p;
+   cout<<p.x<<"\n"; // 0
+
+   p.x+=1;
+   cout<<p.x<<"\n"; // 1
+
+   Point p1;
+   cout<<p1.x<<"\n"; // 1
+   return 0;
+ }
+ ```
