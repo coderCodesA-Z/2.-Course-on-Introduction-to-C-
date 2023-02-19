@@ -162,5 +162,24 @@ Memory Leakages are instances where some part of memory space can be accessed by
 
  Some important string methods : 
  ```
- 
+ str.push_back(); -> append a character
+ str.find(); -> substring search
+ str.size() -> returns the size of the string
+ str.substr() -> returns a slice of the string
+ str.at() -> same thing as str[idx], returns the character present at any index 
  ```
+
+ **Taking String User-inputs**
+ ```
+ string ip;
+ cin>>ip; // string user-input without spaces. Terminates when whitespace found.
+
+ // cin.get(charArrayName, size); -> works only for C-style strings(character array implementation)
+
+ getline(cin, ip); // best-way
+ ```
+
+
+ **Tokenising**
+ Tokenising refers to the separation of a string based on delimeters.
+
