@@ -196,6 +196,7 @@ Memory Leakages are instances where some part of memory space can be accessed by
  ```
 
  **Tokenising**
+
  Tokenising refers to the separation of a string based on delimeters.
  ```
  string str = "abc@def@ghi";
@@ -236,4 +237,41 @@ Memory Leakages are instances where some part of memory space can be accessed by
  ```
  str+=str1; // str1 appended to old string. No new string created in memory hence faster
  str = str + str1; // new string created in memory after concatenation. Slower
+ ```
+
+ ## Structs
+ User-defined Datatype to store data of non-similar type as a single unit. 
+
+ Structs are not stored as arrays in memory.
+ ```
+ struct Point {
+   int x, y;
+ };
+
+ int main() {
+   struct Point p;
+   p.x = 10; // initialise values
+   p.y = 20;
+
+   p = {30, 40}; // initialise values 
+
+   cout<<p.x<<" "<<p.y<<"\n"; // accessing
+   return 0;
+ }
+ ```
+
+ **Default Values to member fields**
+ ```
+ struct Point {
+   int x, y;
+   x = y = 0;
+ };
+
+ // if default values assigned to struct members then {} initialisation can no more be used.
+ int main() {
+   struct Point p;
+
+   // p = {30, 40}; // {} initialisation can no more be used.
+   return 0;
+ }
  ```
