@@ -43,7 +43,8 @@ Arguments : passed to functions
 
 Parameters : Recieved in the functions.
 
-Parameter Types : 
+Parameter Types :
+
 a. Default
 
 b. Actual
@@ -60,6 +61,12 @@ c. Formal
 
 ## Pointers
 Pointers store addresses. Size : 8bytes(depends on compiler), but size doesn't vary depending on the datatype. 
+
+'''
+<dataType of var> *ptrName = &varName; 
+cout<< ptrName<<"\n"; // address of variable
+cout<< *ptrName<<"\n"; // value present within the address of variable. Dereferencing
+'''
 
 Types : 
 
@@ -111,4 +118,13 @@ Memory Leakages are instances where some part of memory space can be accessed by
  g++ -E learn.cpp -> pre-processing result
 
  g++ -E learn.cpp > learn1.cpp -> store the pre-processed result of learn.cpp in learn1.cpp
- 
+
+ g++ -E -O1 learn.cpp > learn2.cpp -> store level1 optimisation of learn.cpp in learn1.cpp
+
+ g++ -E -O2 learn.cpp > learn3.cpp -> store level2 optimisation of learn.cpp in learn3.cpp
+
+ g++ -E -O3 learn.cpp > learn4.cpp -> store level3 optimisation of learn.cpp in learn4.cpp
+
+ g++ -S learn.cpp -o learn.s -> generate assemly file of learn.cpp
+
+ Source Code -> Compiler(compiles + makes optimizations) -> Assembly Code -> Object Code -> Linking and Loading -> Executable File 
