@@ -510,7 +510,7 @@ Helps such that we don't have to explicitly delete pointers from memory.
 
 Handles destruction of pointers automatically.
 
-**Note:** delete keyword only helps to delete the connection between the ref var present in the stack and the actual memory location in heap. The memory location however keeps existing until process ends. 
+**Note:** `delete` keyword only helps to delete the connection between the ref var present in the stack and the actual memory location in heap. The memory location however keeps existing until process ends. 
 
 To handle this we have smart pointers. 
 
@@ -582,4 +582,14 @@ cout<<M<<" "<<F<<" "<<G<<"\n"; // 1 2 3
 enums f{M, F = 5, G};
 cout<<M<<" "<<F<<" "<<G<<"\n"; // 0 5 6
 ```
+## 2d Arrays : 
+Row Major, Column Major.
+
+```
+int rows, cols;
+cin>>rows>>cols;
+int **arr = new int*[rows];
+for(int i = 0; i < rows; i++) arr[i] = new int[cols];
+```
+
 
