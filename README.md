@@ -1,19 +1,26 @@
 # 2.-Course-on-Introduction-to-C-
 Important Points from the Course
 
+**Note:** 
+Single Core Processor : Context Switching Happens. Capable of executing 1 process only(10^8 ops/sec)
+Multi Core Processor : Capable of running more than 1 process at a time.
+Point to be noted: 10^8 ops/sec capable of being executed by a processor.
+
+
 ## HeaderFiles
 ```
 #include<iostream>
-// #include is the pre-processor directive
-// iostream is a header file
+// #include is the pre-processor directive that is used to include header files.
+// iostream is a header file, standard input output stream header file of c++
 ```
 
 ## Namespaces
 ```
-using namespace std;
-// namespace can be treated of as a shell that contains code maybe from different authors.
-// different implementations for doing the same work can exist and can be present in different shells
-// to use a particular implementation(from some specific shell we can use namespaces)
+using namespace std; // std is the standard namespace of c++
+// Namespace can be treated of as a shell that contains code maybe from different authors(developers).
+// Different implementations for doing the same work can exist and can be present in different shells[namespaces]
+// To use a particular implementation(from some specific shell we can use namespaces) we can mention the 
+// namespace we want to use.
 ```
 
 ```
@@ -21,27 +28,50 @@ using namespace std;
 // main function, program execution starts from here
 ```
 
+**Compilation:** 
+```
+g++ fileName.cpp -o run
+./run
+```
+
 **NOTE**: An executable piece of code is actually a low level code, which gets converted from its parent high level code during the process of compilation.
 
 ## Variables
 variables : buckets / containers to store data in memory which can be used later.
 variable without initialisation contains garbage value.
+After initialisation, the variable holds the actual value.
 
-datatypes : type of data, a variable can hold.
+datatype : type of data, a variable can hold.
 ```
-<dataType> identifier = val; // declaration + assignment
+<dataType> identifier = <optional val>; // declaration + assignment
 ```
 ```
 <dataType identifier; // declaration
 identifer = val; // assignment
 ```
+Datatypes : int, float, char, bool, ......
+
+Identifier Naming Rules : 
+ - Names can contain letters, digits and underscores
+ - Names must begin with a letter or an underscore ()
+ - Names are case sensitive (myVar and myvar are different variables)
+ - Names cannot contain whitespaces or special characters like !, #, %, etc.
+ - Reserved words (like C++ keywords, such as int) cannot be used as names
+
+ sizeof() -> returns size of a datatype or variable.
+
+ **Note:** Size of datatypes vary, depending on compilers. 
+
+ MAX_INT + 1 => Value Wrap Around in c++. Values becomes negative.
 
 ## Functions
 Functions are blocks of code that structures the overall program file and also helps to reuse code.
 
-Arguments : passed to functions
+Arguments : passed to functions. (Inputs)
 
-Parameters : Recieved in the functions.
+Parameters : Recieved in the functions.(DataHolders for the Inputs)
+
+Output is the return value.
 
 Parameter Types :
 
@@ -57,7 +87,10 @@ c. Formal
 <returnType> function2(int &a, int &b) {} // a & b are pointing to the same memory address where actual parameters are located.
 <returnType> function3(int *a, int *b) {} // a & b are pointers to the actual arguments
 ```
+Primitives are shared as copy, actual address location of the primitive variable is not shared.
+**Note:** If an array was created inside a function other than the main(), then it's instance is destroyed 
 
+as soon as the function gets removed from call stack.
 
 ## Pointers
 Pointers store addresses. Size : 8bytes(depends on compiler), but size doesn't vary depending on the datatype. 
@@ -68,7 +101,24 @@ cout<< ptrName<<"\n"; // address of variable
 cout<< *ptrName<<"\n"; // value present within the address of variable. Dereferencing
 ```
 
-Types : 
+**Pointer that stores address of another pointer is a double pointer.** 
+```
+int a = 10;
+int *p1 = &a;
+int **p2 = &p2;
+```
+
+Pointers can be incremented / decremented. They support pointer arithmetics.
+
+**Note:** Array name is the base address of an array.
+
+Memory allocated during process execution :
+
+1. Stack Memory -> Local Vars stored, Function Calls are pushed(stack frame), also stores record of code execution.
+ 
+2. Heap Memory -> Huge Pool of Memory(new, delete)
+
+**Types :**
 
 a. Dangling Pointer : Pointer that was initialised some address but later deleted. 
    ```
@@ -82,7 +132,7 @@ b. Wild Pointer : Pointer created but not assigned some value.
    ```
 c. Null Pointer : Special Pointer pointing to null value.
    ```
-    <dataType> *ptr = null;
+    <dataType> *ptr = null; // null in ascii is '\0'
    ```
 
 d. Void Pointer : Special Pointer that points to some memory address, not specific.
@@ -127,12 +177,24 @@ Memory Leakages are instances where some part of memory space can be accessed by
 
  g++ -S learn.cpp -o learn.s -> generate assemly file of learn.cpp
 
+ ```
  Source Code -> Compiler(compiles + makes optimizations) -> Assembly Code -> Object Code -> Linking and Loading -> Executable File 
+ ```
+
+ Integers stored in memory as -> Binary.
+
+ Binary -> a> Unsigned b> Signed
+
+ Positive Numbers in Binary Form and, 
+
+ Negative Numbers Stored in 2's Compliment.
 
  ## Strings
  **Declaring Strings**
  ```
- string str = "abc";
+ string str = "abc"; // abc
+ string strr("abc"); // abc
+ string strrr('q', 10); // qqqqqqqqqq
 
  char str1[] = "def";
  char str2[] = {'g', 'h', 'i', '\0'}; // '/0' is the Null character used for terminating strings.
@@ -158,15 +220,16 @@ Memory Leakages are instances where some part of memory space can be accessed by
 
  #include<cstring>
  #include<string.h>
+
  Then string becomes a c-style string.
 
  Some important string methods : 
  ```
- str.push_back(); -> append a character
- str.find(); -> substring search
+ str.push_back(el); -> append a character
+ str.find(substring); -> substring search
  str.size() -> returns the size of the string
- str.substr() -> returns a slice of the string
- str.at() -> same thing as str[idx], returns the character present at any index 
+ str.substr(pos, size) -> returns a slice of the string
+ str.at(idx) -> same thing as str[idx], returns the character present at any index 
  str.swap(str1); -> swaps the content of both strings.
  ```
 
@@ -250,12 +313,12 @@ Memory Leakages are instances where some part of memory space can be accessed by
 
  int main() {
    struct Point p;
-   p.x = 10; // initialise values
+   p.x = 10; // initialise values using dot operator
    p.y = 20;
 
    p = {30, 40}; // initialise values 
 
-   cout<<p.x<<" "<<p.y<<"\n"; // accessing
+   cout<<p.x<<" "<<p.y<<"\n"; // accessing using dot operator
    return 0;
  }
  ```
@@ -312,7 +375,8 @@ Memory Leakages are instances where some part of memory space can be accessed by
    void sum() {
       cout<<x + y<<"\n";
    }
- } var(1, 2);
+ // } var = Point(1, 2); // also works
+ } var(1, 2); // variable assocaited with struct
 
  int main() {
    cout<<var.x<<" "<<var.y<<"\n";
@@ -320,12 +384,13 @@ Memory Leakages are instances where some part of memory space can be accessed by
  }
  ```
  **Structs can be global as well as local like functions**
- 
- **In C writing struct while declararing a struct varaiable is necessary but in C++ its not necessary.**
+
+ **In C writing "struct" while declararing a struct varaiable is mandatory, but in C++ its not necessary.**
  
  **Static Member Vars in structs**
  ```
  struct Point {
+   const static int y = 0;
    static int x; // shared variable. Not a property of the struct vars anymore but part of the struct itself.
  };
  int Point::x = 0; // non-constant static vars needs to be initialised out of the struct block.
@@ -343,3 +408,178 @@ Memory Leakages are instances where some part of memory space can be accessed by
    return 0;
  }
  ```
+ **Declaring a member function globally**
+ ```
+ struct Point {
+   void display();
+ };
+ void Point::display() {
+   cout<<"Function\n";
+ }
+ 
+ int main() {
+  struct Point p;
+  p.display();
+  return 0;
+}
+ ```
+
+ ## Special Pointers
+ **Function Pointers:**
+ ```
+ void print(string &str) {
+   cout<<str<<"\n";
+ }
+
+ int main() {
+   // void (*ptr)(string) = &print; // if string was not passed as reference
+   void (*ptr)(string &str) = &print;
+   // void (*ptr)(string &str) = print; // &wow not needed, simply wow works(function name)
+
+   string x = "def";
+
+   (*ptr)(x);
+
+   return 0;
+ }
+ ```
+
+ Can't allocate/deallocate memory using function pointers.
+
+ **In C++ we can have function pointer arrays if all the functions are of the same return type and input type.**
+ ```
+ void sayHi(string &str) {
+   cout<<"Hi "<<str<<"\n";
+ }
+
+ void sayHello(string &str) {
+   cout<<"Hello "<<str<<"\n";
+ }
+
+ int main() {
+   void (*ptr[])(string &str) = {sayHi, sayHello};
+
+   string x = "abc";
+   (*ptr[0])(x);
+   (*ptr[1])(x);
+ }
+ ```
+
+ **Passing functions to functions using function pointers**
+ ```
+ void sayHiHelper(string &x) {
+   cout<<"Hi "<<x<<"\n";
+ }
+
+ void sayHi(void (*helper)(string &x)) {
+   string x = "abc";
+   helper(x);
+ }
+
+ int main() {
+   sayHi(sayHiHelper);
+   return 0;
+ }
+ ```
+ **Returning functions from functions using function pointers**
+```
+int f1() { return 1; }
+
+int f2() { return 2; }
+
+typedef int(*fptr)(); // This creates a type which represents a pointer for a particular function.
+
+fptr f( char &c ) {
+   if ( c == '1' ) {
+     return f1;
+   }
+   else {
+     return f2;
+   }
+}
+
+int main() {
+   char c = '1';
+   ftpr fp = f(c);
+   cout << fp() << endl;
+}
+```
+
+## Smart Pointers
+Helps such that we don't have to explicitly delete pointers from memory.
+
+Handles destruction of pointers automatically.
+
+**Note:** delete keyword only helps to delete the connection between the ref var present in the stack and the actual memory location in heap. The memory location however keeps existing until process ends. 
+
+To handle this we have smart pointers. 
+
+**Types:**
+a. Unique Pointers : Handles auto destruction of pointer memory, If one object is created & a pointer points to it already then we can't assign any more pointers to point at that memory location.
+```
+#include <memory>
+struct Point {
+   int x = 10;
+};
+
+int main() {
+   unique_ptr<Point> p1(new Point); // pointing to struct 
+   unique_ptr<Point> p2;
+   // p2 = p1; // not possible
+   cout<<p1->x<<'\n'; // arrow operator is used to access any field of an object from memory that is pointed by the pointer
+}
+```
+
+b. Smart Pointers : Multiple Pointers can point to same object.
+```
+#include <memory>
+struct Point {
+   int x = 10;
+};
+
+void demo(shared_ptr<Point> &p1) {
+   shared_ptr<Point> p4(new Point);
+   p4 = p1;
+   cout<<p1.use_count()<<"\n";
+   cout<<p4.use_count()<<"\n";
+}
+
+int main() {
+   shared_ptr<Point> p1(new Point); // pointing to struct 
+   shared_ptr<Point> p2(new Point);
+   shared_ptr<Point> p3(new Point);
+
+   p2 = p1;
+   p3 = p1;
+
+   demo(p1);
+
+
+   // Reference Counter : Stores the count of the pointers pointing to the same memory location
+   cout<<p1.use_count()<<"\n"; // . operator used because use_count() is a method of the shared_pointer object
+   cout<<p2.use_count()<<"\n";
+   cout<<p3.use_count()<<"\n";
+
+   return 0;
+}
+```
+
+**Note**:
+
+If we have a function pointer, we can dereference it any number of times.  `*****(fptr)(1, 2);`
+
+But in case of normal pointers that is pointing to a variable, dereferencing more than once won't be possible.
+
+## Enums:
+Maps any string to a value.
+```
+enum e{M,F};
+cout<<M<<" "<<F<<"\n"; // 0 1
+
+enums f{M=1, F, G};
+cout<<M<<" "<<F<<" "<<G<<"\n"; // 1 2 3
+
+enums f{M, F = 5, G};
+cout<<M<<" "<<F<<" "<<G<<"\n"; // 0 5 6
+```
+
