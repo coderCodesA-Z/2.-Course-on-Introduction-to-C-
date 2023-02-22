@@ -592,4 +592,19 @@ int **arr = new int*[rows];
 for(int i = 0; i < rows; i++) arr[i] = new int[cols];
 ```
 
+## Bit Manipualtion
+&, |, ~, ^, >>, <<
 
+**Check if KthBit is set**
+```
+if((x&(1<<k)) == 1) : Set
+else : Unset
+```
+**Clear kth bit**
+```
+x & (~(1<<k))
+```
+**Set kth bit**
+```
+x | (1<<k)
+```
