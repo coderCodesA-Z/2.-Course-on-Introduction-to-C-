@@ -597,8 +597,7 @@ for(int i = 0; i < rows; i++) arr[i] = new int[cols];
 
 **Check if KthBit is set**
 ```
-if((x&(1<<k)) == 1) : Set
-else : Unset
+x&(1<<k))
 ```
 **Clear kth bit**
 ```
@@ -607,4 +606,58 @@ x & (~(1<<k))
 **Set kth bit**
 ```
 x | (1<<k)
+```
+**Toggle kth bit**
+```
+x ^ (1<<k)
+```
+**Rightmost Set Bit**
+```
+x & ~(x-1)
+```
+
+**Toggle rightmost set bit**
+```
+rightmostsetbit = x & ~(x-1);
+x ^ rightmostsetbit;
+```
+**Clear right most set bit**
+```
+x & (x-1)
+```
+**kth Power of 2**
+```
+(1 << k)
+```
+
+**divide by 2**
+```
+n >> 1
+```
+
+**Multiply a number with kth power 2**
+```
+n * 2^k == n << k;
+// eg. : 5 * (2^2);
+// binary of 5 * (2^2) : 10100
+// binary of 5 : 101
+// shifting 5 by 2 positions ahead(left shift by 2 positions) gives 20
+```
+
+**Divide a number by kth power of 2**
+```
+n >> k
+```
+
+**Check whether power of 2**
+```
+n && (n&(n-1))
+```
+
+**Number of set bits**
+```
+while(n != 0) {
+   count++;
+   n = n & n-1;
+}
 ```
