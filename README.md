@@ -661,3 +661,82 @@ while(n != 0) {
    n = n & n-1;
 }
 ```
+
+## Object Oriented Programming
+Famous Programming Paradigms :
+
+1. Procedural : Structured Type, order of execution only mattered. 
+
+2. Object Oriented : Classes and Objects Focused. Real World entities mapped with code.
+
+Small Talk is purely object oriented. 
+
+3. Functional : Everything can be defined/represented as a function.
+
+**Object** : Any real world entity that has a state and object.
+
+**Class** : Blueprint of collection of object is called Class.
+
+```
+class Employee {
+public:
+   string name;
+private:
+   int sal = 1000;
+   int empCode;
+   // By default if we don't mention access modifiers, everything is private
+
+public:
+   Employee() {
+      this->name = "";
+      setSal(0);
+      this->empCode = -1;
+   }
+   Employee(string name, int sal ,int empCode) {
+      this->name = name; // this can only be used inside class
+      setSal(sal);
+      this->empCode = empCode;
+   }
+   void setSalary(int sal) {
+      if(sal < 0) return;
+      this->sal = sal;
+   }
+
+   int getSalary() {
+      return this->sal;
+   }
+};
+```
+
+**Copy Constructor**
+```
+string s = "abc";
+
+string s1 = s; // new object created with the help of other objects, we call copy constructor
+
+string s2;
+s2 = s; // already created object being assigned a value, doesn't call copy constructor
+```
+
+CopyConstructor for employee class
+```
+// within public properties
+Employee(const &emp) {
+   cout<<"Called Copy Constructor\n";
+}
+```
+
+**Destructor**
+```
+~Employee() {
+   // delete "this" happens internally that destructs the object created in memory
+   cout<<"Destructor Called\n";
+}
+```
+
+## STL(Standard Template Library)
+Vectors : Dynamic Arrays. 
+Grows and shrinks automatically.
+```
+vector<datatype> <name>;
+```
